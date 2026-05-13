@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>a.brătescu</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,700;1,300&family=Archivo+Narrow:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+
+/* ══ RESET ══ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #ffffff;
+  --black: #141414;
+  --mid: #888580;
+  --light: #e0ddd6;
+  --sidebar-w: 380px;
+  --content-w: 620px;
+}
+
+body {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--black);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* ══ SPLASH ══ */
+#splash {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  min-height: 100vh !important;
+  padding: 4rem !important;
+}
+
+.splash-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.splash-title {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: clamp(3rem, 8vw, 7rem);
+  letter-spacing: 0.04em;
+  color: var(--black);
+  line-height: 1;
+}
+
+.splash-subtitle {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-weight: 400;
+  font-size: 0.82rem;
+  color: var(--mid);
+  letter-spacing: 0.06em;
+  margin-top: 0.6rem;
+}
+
+.splash-btn {
+  display: inline-block;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  border: 0.5px solid var(--black);
+  padding: 0.9rem 2.2rem;
+  transition: background 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+
+.splash-btn:hover {
+  background: var(--black);
+  color: var(--bg);
+}
+
+.splash-footer {
+  position: fixed;
+  bottom: 2rem;
+  left: 4rem;
+  font-size: 0.68rem;
+  color: var(--light);
+  letter-spacing: 0.06em;
+}
+
+/* ══ PROJECTS (hidden initially) ══ */
+#projects {
+  display: none;
+  animation: fadeIn 10s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ══ PROJECTS STYLES ══ */
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --black: #141414;
+    --mid: #888580;
+    --light: #e0ddd6;
+    --sidebar-w: 380px;
+    --content-w: 620px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-weight: 400;
+    background: var(--bg);
+    color: var(--black);
+    min-height: 100vh;
+    animation: fadeIn 10s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .page {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── MAIN SCROLL AREA ── */
+  .scroll-area {
+    flex: 1;
+    padding-right: var(--sidebar-w);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 3rem;
+  }
+
+  /* ── PROJECTS GRID WRAPPER ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: calc(100vw - var(--sidebar-w) - 6rem);
+  }
+
+  .projects-grid .project.open {
+    grid-column: 1 / -1;
+  }
+
+  /* ── SITE HEADER ── */
+  .site-header {
+    width: calc(100vw - var(--sidebar-w) - 6rem);
+    padding: 1.2rem 0 1rem;
+    border-bottom: 1px solid var(--light);
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    z-index: 50;
+  }
+
+  .site-header h1 {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.06em;
+    color: var(--black);
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+
+  .site-header h1 span {
+    font-weight: 700;
+  }
+
+  .site-header p {
+    font-size: 0.75rem;
+    color: var(--mid);
+    letter-spacing: 0.03em;
+  }
+
+  .site-subtitle {
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: var(--mid);
+    margin-top: 0.3rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ── PROJECT ENTRY ── */
+  .project {
+    width: calc(100vw - var(--sidebar-w) - 6rem);
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--light);
+  }
+
+  /* Closed state: image left, info right */
+  .project-cover {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    cursor: pointer;
+  }
+
+  .project-image {
+    width: 100%;
+    aspect-ratio: 16/7;
+    overflow: hidden;
+    background: var(--light);
+    cursor: pointer;
+  }
+
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .project-image:hover img { transform: scale(1.02); }
+  .project-image svg { width: 100%; height: 100%; }
+
+  .project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 0.3rem;
+  }
+
+  .project-title {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.05;
+    color: var(--black);
+  }
+
+  .project-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .meta-row {
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .meta-row strong {
+    font-weight: 700;
+    font-family: 'Archivo', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    margin-right: 0.35rem;
+  }
+
+  .meta-row span { color: var(--mid); }
+
+  .project-teaser {
+    font-size: 0.78rem;
+    line-height: 1.8;
+    color: var(--mid);
+    margin-top: 0.5rem;
+  }
+
+  /* butonul citește mai mult — ascuns pe desktop */
+  .read-more-btn { display: none; }
+
+  /* ── PROJECT NUMBER ── */
+  .project {
+    position: relative;
+  }
+
+  .project-number {
+    position: absolute;
+    left: -3.5rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--light);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* ── PROJECT COVER STRUCTURE ── */
+  .project-cover-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    align-items: start;
+  }
+
+  /* pe desktop descrierea e vizibilă în coloana dreaptă (în project-info) */
+  .project-cover-description {
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  /* ── OPACITY EFFECT ── */
+  .projects-dimmed .project {
+    opacity: 0.25;
+    transition: opacity 0.4s ease;
+  }
+
+  .projects-dimmed .project.open {
+    opacity: 1;
+  }
+
+  .project.open .project-cover {
+    display: none;
+  }
+
+  .project-body {
+    display: none;
+  }
+
+  .project.open .project-body {
+    display: grid;
+  }
+
+  .project.open {
+    width: calc(100vw - var(--sidebar-w) - 6rem);
+  }
+
+  .project.open .project-body {
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .project-left {
+    min-width: 0;
+  }
+
+  .project-center {
+    min-width: 0;
+  }
+
+  .project-right {
+    display: none;
+  }
+
+  .project-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease;
+  }
+
+  .project.open .project-details {
+    max-height: 15000px;
+  }
+
+  .project-left-description {
+    width: 100%;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .project-left-description .project-teaser {
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  /* ── SLIDER ── */
+  .project-gallery {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .slider-track {
+    display: flex;
+    transition: transform 0.45s ease;
+  }
+
+  .slider-track img {
+    min-width: 100%;
+    width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .slider-track img.drawing {
+    background: #ffffff;
+    border: 0.5px solid var(--light);
+    padding: 1.5rem;
+    box-sizing: border-box;
+  }
+
+  .slider-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.8rem;
+  }
+
+  .slider-arrows {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .slider-btn {
+    background: none;
+    border: 0.5px solid var(--light);
+    color: var(--black);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+    font-family: 'Archivo Narrow', sans-serif;
+    transition: all 0.2s;
+  }
+
+  .slider-btn:hover {
+    border-color: var(--black);
+  }
+
+  .slider-counter {
+    font-size: 0.68rem;
+    color: var(--mid);
+    letter-spacing: 0.1em;
+  }
+
+  .project-description {
+    font-size: 0.82rem;
+    line-height: 1.9;
+    color: var(--mid);
+    text-align: justify;
+    hyphens: auto;
+    padding-top: 0.5rem;
+    width: 100%;
+  }
+
+  .accordion-hint {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-top: 0.6rem;
+    transition: color 0.2s;
+  }
+
+  .project-image:hover + .project-title + .project-meta + .accordion-hint,
+  .accordion-hint:hover {
+    color: var(--mid);
+  }
+
+  /* ── FIXED SIDEBAR ── */
+  .sidebar {
+    width: var(--sidebar-w);
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 4rem 2.2rem;
+    border-left: 1px solid var(--light);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
+  }
+
+  .sidebar-name {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    color: var(--black);
+    margin-bottom: 0.15rem;
+  }
+
+  .sidebar-name span {
+    font-weight: 700;
+  }
+
+  .sidebar-bio {
+    font-size: 0.88rem;
+    line-height: 1.85;
+    color: #aaa9a6;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .sidebar-divider {
+    height: 1px;
+    background: var(--light);
+    flex-shrink: 0;
+  }
+
+  .sidebar-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .sidebar-nav li a {
+    font-size: 0.76rem;
+    color: var(--mid);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    padding: 0.2rem 0;
+    display: block;
+    transition: color 0.15s;
+  }
+
+  .sidebar-nav li a:hover { color: var(--black); }
+
+  .sidebar-section-title {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 0.6rem;
+  }
+
+  .sidebar-contact {
+    font-size: 0.73rem;
+    line-height: 2.1;
+    color: var(--mid);
+  }
+
+  .sidebar-contact strong {
+    font-weight: 700;
+    font-family: 'Archivo', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+  }
+
+  .sidebar-contact a {
+    color: var(--mid);
+    text-decoration: none;
+  }
+
+  .sidebar-contact a:hover { color: var(--black); }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    width: 100%;
+    max-width: var(--content-w);
+    padding: 3rem 0 4rem;
+    font-size: 0.7rem;
+    color: var(--mid);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── RESPONSIVE MOBILE ── */
+  @media (max-width: 768px) {
+
+    :root {
+      --sidebar-w: 0px;
+      --content-w: 100%;
+    }
+
+    body { display: block; }
+
+    .page { flex-direction: column; }
+
+    /* Scroll area full width */
+    .scroll-area {
+      padding-right: 0;
+      padding-left: 0;
+      align-items: flex-start;
+    }
+
+    .site-header {
+      width: 100%;
+      padding: 1.5rem 1.2rem 1rem;
+      max-width: 100%;
+    }
+
+    /* Header mobil */
+    .site-header > div {
+      display: inline-block;
+    }
+
+    .site-header h1 {
+      display: block;
+      font-size: 2rem;
+    }
+
+    .site-subtitle {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.65rem;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+      width: 100%;
+    }
+
+    .project {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      border-right: none;
+    }
+
+    /* ── COVER: imagine stânga, titlu+meta dreapta ── */
+    .project-cover-top {
+      display: grid;
+      grid-template-columns: 38% 1fr;
+      gap: 0.8rem;
+      align-items: start;
+    }
+
+    .project-cover-top .project-image {
+      aspect-ratio: 4/3;
+      width: 100%;
+    }
+
+    .project-cover-top .project-info {
+      padding-top: 0;
+      gap: 0.3rem;
+    }
+
+    .project-title { font-size: 1rem; }
+
+    /* ── DESCRIERE full-width dedesubt, trunchiat ── */
+    .project-cover-description {
+      margin-top: 0.7rem;
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    .project-cover-description .project-teaser {
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-align: justify;
+      hyphens: auto;
+      margin-top: 0 !important;
+    }
+
+    .project-cover-description .project-teaser + .project-teaser {
+      display: none;
+    }
+
+    .read-more-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: 'Archivo Narrow', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      cursor: pointer;
+      margin-top: 0.3rem;
+      display: block;
+    }
+
+    /* când e expandat, arată și al doilea paragraf */
+    .project-cover-description.expanded .project-teaser {
+      display: block !important;
+      -webkit-line-clamp: unset;
+      overflow: visible;
+    }
+
+    /* Open project — stack vertically on mobile */
+    .project.open {
+      width: 100%;
+    }
+
+    .project.open .project-body {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .project-left,
+    .project-center,
+    .project-right { width: 100%; }
+
+    /* Slider buttons bigger for touch */
+    .slider-btn {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.8rem;
+    }
+
+    .slider-track img {
+      max-height: 55vw;
+    }
+
+    /* Sidebar moves to bottom */
+    .sidebar {
+      position: relative;
+      width: 100%;
+      min-height: unset;
+      border-left: none;
+      border-top: 1px solid var(--light);
+      padding: 2rem 1.2rem;
+      gap: 1.5rem;
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 1.5rem 1.2rem 2rem;
+    }
+  }
+
+
+/* ══ MOBILE SPLASH ══ */
+@media (max-width: 768px) {
+  #splash { padding: 2.5rem 1.5rem; }
+  .splash-footer { left: 1.5rem; bottom: 1.5rem; }
+}
+
+
+/* ══ FORCE SPLASH VISIBLE ══ */
+#splash[style*="none"] { display: none !important; }
+#splash:not([style*="none"]) { display: flex !important; }
+</style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="splash-inner">
+    <div>
+      <h1 class="splash-title">a.brătescu</h1>
+      <p class="splash-subtitle">studio de arhitectură & design</p>
+    </div>
+    <a class="splash-btn" href="#" onclick="showProjects(); return false;">→ Vezi proiecte</a>
+  </div>
+
+  <div class="splash-footer">București, România</div>
+</div>
+
+<!-- PROJECTS -->
+<div id="projects" style="min-height:100vh;">
+<div class="page">
+
+  <div class="scroll-area">
+
+    <header class="site-header">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+        <div style="display: inline-block;" id="header-inner">
+          <h1 id="site-title">a.brătescu</h1>
+          <p class="site-subtitle" id="site-subtitle"><span>studio</span><span>de</span><span>arhitectură</span><span>&</span><span>design</span></p>
+        </div>
+        <p style="font-family: 'Archivo Narrow', sans-serif; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); padding-bottom: 0.15rem;">Proiecte alese</p>
+      </div>
+      <div id="filter-back" style="display:none; margin-top: 0.5rem;">
+        <a href="#" onclick="filterProjects('all'); return false;" style="font-family: 'Archivo Narrow', sans-serif; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); text-decoration: none;">← toate proiectele</a>
+      </div>
+    </header>
+
+    <!-- PROJECT 1 -->
+    <article class="project" id="proiect-brasov" data-category="arhitectura">
+      <div class="project-number">01</div>
+      <div class="project-cover" onclick="toggleProject('proiect-brasov')">
+        <div class="project-cover-top">
+          <div class="project-image">
+            <img src="imagine_coperta.jpeg" alt="Cărămidăriei 13" />
+          </div>
+          <div class="project-info">
+            <div class="project-title">Cărămidăriei 13</div>
+            <div class="project-meta">
+              <div class="meta-row"><strong>Program</strong><span>Locuințe colective</span></div>
+              <div class="meta-row"><strong>Location</strong><span>Brașov, România</span></div>
+              <div class="meta-row"><strong>Status</strong><span>Avizare PUZ</span></div>
+              <div class="meta-row"><strong>Year</strong><span>2026</span></div>
+            </div>
+            <div class="project-cover-description">
+              <p class="project-teaser">Strada Cărămidăriei se caracterizează printr-un țesut urban heterogen, marcat de discontinuități de alinament, parcelar neregulat și o relație slab definită între spațiul construit și domeniul public. În acest context destructurat, intervenția nu urmărește o integrare mimetică, ci operează prin contrast și claritate formală, asumând rolul unui element ordonator.</p>
+              <p class="project-teaser" style="margin-top: 0.8rem;">Masa construită este organizată astfel încât să genereze în interior o piață urbană protejată — nucleul proiectului și contrapondere la incoerența spațiului public adiacent. Parterul activ mediază relația cu strada prin funcțiuni comerciale și transparență pietonală, în timp ce caracterul general al ansamblului rămâne introvertit, privilegiind coerența internă față de un context perceput ca instabil.</p>
+              <button class="read-more-btn" onclick="toggleReadMore(this, event)">↓ citește mai mult</button>
+            </div>
+            <div class="accordion-hint" id="hint-proiect-brasov">↓ detalii proiect</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-left">
+          <div class="project-image" onclick="toggleProject('proiect-brasov')" style="cursor:pointer;">
+            <img src="imagine_coperta.jpeg" alt="Cărămidăriei 13" />
+          </div>
+          <div class="project-meta" style="margin-top: 0.8rem;">
+            <div class="meta-row"><strong>Cărămidăriei 13</strong></div>
+            <div class="meta-row"><strong>Location</strong><span>Brașov, România</span></div>
+            <div class="meta-row"><strong>Status</strong><span>Avizare PUZ</span></div>
+            <div class="meta-row"><strong>Year</strong><span>2026</span></div>
+          </div>
+          <div class="project-left-description">
+            <p class="project-teaser" style="margin-top: 1rem;">Strada Cărămidăriei se caracterizează printr-un țesut urban heterogen, marcat de discontinuități de alinament, parcelar neregulat și o relație slab definită între spațiul construit și domeniul public. În acest context destructurat, intervenția nu urmărește o integrare mimetică, ci operează prin contrast și claritate formală, asumând rolul unui element ordonator.</p>
+            <p class="project-teaser" style="margin-top: 0.8rem;">Masa construită este organizată astfel încât să genereze în interior o piață urbană protejată — nucleul proiectului și contrapondere la incoerența spațiului public adiacent. Parterul activ mediază relația cu strada prin funcțiuni comerciale și transparență pietonală, în timp ce caracterul general al ansamblului rămâne introvertit, privilegiind coerența internă față de un context perceput ca instabil.</p>
+          </div>
+          <div class="accordion-hint" onclick="toggleProject('proiect-brasov')" style="cursor:pointer; margin-top: 1rem;">↑ închide</div>
+        </div>
+        <div class="project-center">
+          <div class="project-details">
+            <div class="project-gallery" id="slider-brasov">
+              <div class="slider-track">
+                <img src="proiect1_coperta_veche.jpeg" alt="Perspectivă Cărămidăriei 13" />
+                <img src="proiect1_fatada.png" alt="Fațadă Cărămidăriei 13" />
+                <img src="proiect1_perspectiva.jpeg" alt="Perspectivă laterală Cărămidăriei 13" />
+              </div>
+              <div class="slider-controls">
+                <div class="slider-arrows">
+                  <button class="slider-btn" onclick="slideGallery('slider-brasov', -1)">← prev</button>
+                  <button class="slider-btn" onclick="slideGallery('slider-brasov', 1)">next →</button>
+                </div>
+                <span class="slider-counter" id="counter-slider-brasov">1 / 3</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 2 -->
+    <article class="project" id="proiect-catinei" data-category="arhitectura">
+      <div class="project-number">02</div>
+      <div class="project-cover" onclick="toggleProject('proiect-catinei')">
+        <div class="project-cover-top">
+          <div class="project-image">
+            <img src="p2_coperta.jpg" alt="Cătinei" />
+          </div>
+          <div class="project-info">
+            <div class="project-title">Cătinei</div>
+            <div class="project-meta">
+              <div class="meta-row"><strong>Program</strong><span>Locuință unifamilială</span></div>
+              <div class="meta-row"><strong>Location</strong><span>Strada Cătinei, București</span></div>
+              <div class="meta-row"><strong>Status</strong><span>Realizat</span></div>
+              <div class="meta-row"><strong>Year</strong><span>2022</span></div>
+            </div>
+            <div class="project-cover-description">
+              <p class="project-teaser">Implantată într-un parcelar urban dens, această locuință unifamilială își construiește identitatea la intersecția dintre rigoarea geometrică și subtilitatea expresiei materiale. Alipirea la calcan dictează o dezvoltare laterală controlată, în timp ce volumul principal, desfășurat pe două niveluri, este fragmentat subtil pentru a permite luminii naturale să pătrundă generos în interior.</p>
+              <p class="project-teaser" style="margin-top: 0.8rem;">Limbajul arhitectural este unul reținut și coerent: o compoziție cubică pură, animată de retrageri și console care creează ritmuri spațiale și umbre profunde. Deschiderea către curte se face prin suprafețe vitrate ample, care diluează granița dintre interior și exterior, în timp ce terasa de la etaj, parțial umbrită, devine o extensie firească a spațiilor de zi. Proiectul mizează pe echilibru: între deschidere și protecție, între austeritate formală și căldură domestică, între oraș și intimitate.</p>
+              <button class="read-more-btn" onclick="toggleReadMore(this, event)">↓ citește mai mult</button>
+            </div>
+            <div class="accordion-hint" id="hint-proiect-catinei">↓ detalii proiect</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-left">
+          <div class="project-image" onclick="toggleProject('proiect-catinei')" style="cursor:pointer;">
+            <img src="p2_coperta.jpg" alt="Cătinei" />
+          </div>
+          <div class="project-meta" style="margin-top: 0.8rem;">
+            <div class="meta-row"><strong>Cătinei</strong></div>
+            <div class="meta-row"><strong>Location</strong><span>Strada Cătinei, București</span></div>
+            <div class="meta-row"><strong>Status</strong><span>Realizat</span></div>
+            <div class="meta-row"><strong>Year</strong><span>2022</span></div>
+          </div>
+          <div class="project-left-description">
+            <p class="project-teaser" style="margin-top: 1rem;">Implantată într-un parcelar urban dens, această locuință unifamilială își construiește identitatea la intersecția dintre rigoarea geometrică și subtilitatea expresiei materiale. Alipirea la calcan dictează o dezvoltare laterală controlată, în timp ce volumul principal, desfășurat pe două niveluri, este fragmentat subtil pentru a permite luminii naturale să pătrundă generos în interior.</p>
+            <p class="project-teaser" style="margin-top: 0.8rem;">Limbajul arhitectural este unul reținut și coerent: o compoziție cubică pură, animată de retrageri și console care creează ritmuri spațiale și umbre profunde. Deschiderea către curte se face prin suprafețe vitrate ample, care diluează granița dintre interior și exterior, în timp ce terasa de la etaj, parțial umbrită, devine o extensie firească a spațiilor de zi. Proiectul mizează pe echilibru: între deschidere și protecție, între austeritate formală și căldură domestică, între oraș și intimitate.</p>
+          </div>
+          <div class="accordion-hint" onclick="toggleProject('proiect-catinei')" style="cursor:pointer; margin-top: 1rem;">↑ închide</div>
+        </div>
+        <div class="project-center">
+          <div class="project-details">
+            <div class="project-gallery" id="slider-catinei">
+              <div class="slider-track">
+                <img src="p2_img1.jpg" alt="Cătinei 1" />
+                <img src="p2_img2.jpg" alt="Cătinei 2" />
+                <img src="p2_img3.jpg" alt="Cătinei 3" />
+                <img src="p2_img5.jpg" alt="Cătinei 5" />
+                <img src="p2_img6.jpg" alt="Cătinei 6" />
+                <img src="p2_img7.jpg" alt="Cătinei 7" />
+                <img src="p2_img8.jpg" alt="Cătinei 8" />
+                <img src="p2_img9.jpg" alt="Cătinei 9" />
+                <img src="p2_img10.jpg" alt="Cătinei 10" />
+                <img src="p2_img11.jpg" alt="Cătinei 11" />
+                <img src="p2_plan_etaj.jpg" alt="Plan etaj Cătinei" class="drawing" />
+                <img src="p2_plan_parter.jpg" alt="Plan parter Cătinei" class="drawing" />
+                <img src="p2_sectiune1.jpg" alt="Secțiune 1 Cătinei" class="drawing" />
+                <img src="p2_sectiune2.jpg" alt="Secțiune 2 Cătinei" class="drawing" />
+              </div>
+              <div class="slider-controls">
+                <div class="slider-arrows">
+                  <button class="slider-btn" onclick="slideGallery('slider-catinei', -1)">← prev</button>
+                  <button class="slider-btn" onclick="slideGallery('slider-catinei', 1)">next →</button>
+                </div>
+                <span class="slider-counter" id="counter-slider-catinei">1 / 14</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 3 -->
+    <article class="project" id="proiect-snagov" data-category="arhitectura">
+      <div class="project-number">03</div>
+      <div class="project-cover" onclick="toggleProject('proiect-snagov')">
+        <div class="project-cover-top">
+          <div class="project-image">
+            <img src="p3_coperta.jpg" alt="Magnoliilor 4" />
+          </div>
+          <div class="project-info">
+            <div class="project-title">Magnoliilor 4</div>
+            <div class="project-meta">
+              <div class="meta-row"><strong>Program</strong><span>Locuință individuală</span></div>
+              <div class="meta-row"><strong>Location</strong><span>Snagov, România</span></div>
+              <div class="meta-row"><strong>Status</strong><span>Realizat</span></div>
+              <div class="meta-row"><strong>Year</strong><span>2024</span></div>
+            </div>
+            <div class="project-cover-description">
+              <p class="project-teaser">Locuință individuală ce explorează dialogul dintre materialele naturale — cărămidă aparentă, lemn masiv — și volumetria contemporană cu acoperiș în pantă.</p>
+            </div>
+            <div class="accordion-hint" id="hint-proiect-snagov">↓ detalii proiect</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-left">
+          <div class="project-image" onclick="toggleProject('proiect-snagov')" style="cursor:pointer;">
+            <img src="p3_coperta.jpg" alt="Magnoliilor 4" />
+          </div>
+          <div class="project-meta" style="margin-top: 0.8rem;">
+            <div class="meta-row"><strong>Magnoliilor 4</strong></div>
+            <div class="meta-row"><strong>Location</strong><span>Snagov, România</span></div>
+            <div class="meta-row"><strong>Status</strong><span>Realizat</span></div>
+            <div class="meta-row"><strong>Year</strong><span>2024</span></div>
+          </div>
+          <div class="project-left-description">
+            <p class="project-teaser" style="margin-top: 1rem;">Locuință individuală ce explorează dialogul dintre materialele naturale — cărămidă aparentă, lemn masiv — și volumetria contemporană cu acoperiș în pantă.</p>
+          </div>
+          <div class="accordion-hint" onclick="toggleProject('proiect-snagov')" style="cursor:pointer; margin-top: 1rem;">↑ închide</div>
+        </div>
+        <div class="project-center">
+          <div class="project-details">
+            <div class="project-gallery" id="slider-snagov">
+              <div class="slider-track">
+                <img src="p3_intrare.jpeg" alt="Intrare Magnoliilor 4" />
+                <img src="p3_fatada.jpeg" alt="Fațadă Magnoliilor 4" />
+                <img src="p3_constructie.jpeg" alt="Construcție Magnoliilor 4" />
+                <img src="p3_baie1.jpeg" alt="Baie Magnoliilor 4" />
+                <img src="p3_baie2.jpeg" alt="Baie master Magnoliilor 4" />
+              </div>
+              <div class="slider-controls">
+                <div class="slider-arrows">
+                  <button class="slider-btn" onclick="slideGallery('slider-snagov', -1)">← prev</button>
+                  <button class="slider-btn" onclick="slideGallery('slider-snagov', 1)">next →</button>
+                </div>
+                <span class="slider-counter" id="counter-slider-snagov">1 / 5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 4 -->
+    <article class="project" id="proiect-cercetare" data-category="cercetare">
+      <div class="project-number">04</div>
+      <div class="project-cover" onclick="toggleProject('proiect-cercetare')">
+        <div class="project-cover-top">
+          <div class="project-image">
+            <img src="ARH_ALEX_BRĂTESCU-3_page-0001.jpg" alt="Cultura Spațiului Public" />
+          </div>
+          <div class="project-info">
+            <div class="project-title">Cultura Spațiului Public</div>
+            <div class="project-meta">
+              <div class="meta-row"><strong>Publicație</strong><span>Teză de doctorat</span></div>
+              <div class="meta-row"><strong>Status</strong><span>În curs de publicare</span></div>
+              <div class="meta-row"><strong>Year</strong><span>2025</span></div>
+            </div>
+            <div class="project-cover-description">
+              <p class="project-teaser">Această cercetare propune o reevaluare conceptuală și funcțională a pieței urbane ca formă fundamentală a spațiului public, analizată prin prisma unui sistem informațional deschis și ca expresie a sustenabilității sociale într-o societate democratică. Plecând de la premisa că individul își modelează identitatea inclusiv prin interacțiunile din spațiul public, lucrarea investighează cum arhitectura poate susține și amplifica aceste interacțiuni, într-un context urban aflat în continuă transformare.</p>
+              <button class="read-more-btn" onclick="toggleReadMore(this, event)">↓ citește mai mult</button>
+            </div>
+            <div class="accordion-hint" id="hint-proiect-cercetare">↓ detalii proiect</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-left">
+          <div class="project-image" onclick="toggleProject('proiect-cercetare')" style="cursor:pointer;">
+            <img src="ARH_ALEX_BRĂTESCU-3_page-0001.jpg" alt="Cultura Spațiului Public" />
+          </div>
+          <div class="project-meta" style="margin-top: 0.8rem;">
+            <div class="meta-row"><strong>Cultura Spațiului Public</strong></div>
+            <div class="meta-row"><strong>Publicație</strong><span>Teză de doctorat</span></div>
+            <div class="meta-row"><strong>Status</strong><span>În curs de publicare</span></div>
+            <div class="meta-row"><strong>Year</strong><span>2025</span></div>
+          </div>
+          <div class="accordion-hint" onclick="toggleProject('proiect-cercetare')" style="cursor:pointer; margin-top: 1rem;">↑ închide</div>
+        </div>
+        <div class="project-center">
+          <div class="project-details">
+            <div class="project-gallery" id="slider-cercetare">
+              <div class="slider-track">
+                <img src="ARH_ALEX_BRĂTESCU-3_page-0001.jpg" alt="Cultura Spațiului Public" />
+              </div>
+              <div class="slider-controls">
+                <div class="slider-arrows">
+                  <button class="slider-btn" onclick="slideGallery('slider-cercetare', -1)">← prev</button>
+                  <button class="slider-btn" onclick="slideGallery('slider-cercetare', 1)">next →</button>
+                </div>
+                <span class="slider-counter" id="counter-slider-cercetare">1 / 1</span>
+              </div>
+            </div>
+            <div class="project-text" style="margin-top: 2rem;">
+              <p class="project-teaser">Această cercetare propune o reevaluare conceptuală și funcțională a pieței urbane ca formă fundamentală a spațiului public, analizată prin prisma unui sistem informațional deschis și ca expresie a sustenabilității sociale într-o societate democratică. Plecând de la premisa că individul își modelează identitatea inclusiv prin interacțiunile din spațiul public, lucrarea investighează cum arhitectura poate susține și amplifica aceste interacțiuni, într-un context urban aflat în continuă transformare.</p>
+              <p class="project-teaser" style="margin-top: 0.8rem;">Piața urbană, una dintre cele mai vechi forme de spațiu public, a cunoscut o degradare a funcțiunii sale tradiționale în secolul XX, odată cu afirmarea planificării urbane raționaliste și dezvoltarea transportului auto. În acest context, dimensiunea umană a fost treptat exclusă, iar spațiul public a devenit un fundal inert, lipsit de vitalitate socială. Lucrarea propune o inversare a acestei paradigme, pledând pentru restabilirea pieței ca spațiu central al vieții comunitare, în care dinamica socială, culturală și simbolică poate fi exprimată liber și participativ.</p>
+              <p class="project-teaser" style="margin-top: 0.8rem;">Piața urbană este investigată nu doar ca formă fizică, ci ca spațiu mental și cultural, capabil să genereze sensuri și interacțiuni. Este un loc „al tuturor și al nimănui", cu o identitate proprie, dar în același timp flexibil și adaptabil. De aici rezultă o serie de întrebări fundamentale pe care cercetarea le adresează: poate piața urbană să devină un catalizator al coeziunii sociale în epoca digitalizării? Poate contribui ea la revitalizarea peisajului urban românesc, prin recuperarea valorii sale comunitare?</p>
+              <p class="project-teaser" style="margin-top: 0.8rem;">Analiza teoretică este completată de o cercetare interdisciplinară, ce include studiul bibliografiei internaționale, dialogul cu comunitățile locale, analiza studiilor de caz — toate convergând spre conturarea unei noi înțelegeri asupra pieței urbane contemporane. Rezultatul este propunerea unui cadru conceptual și metodologic care să ghideze intervențiile viitoare în spațiul public: un model de proiectare care pornește de la viața urbană reală, nu de la forme impuse sau norme rigide.</p>
+              <p class="project-teaser" style="margin-top: 0.8rem;">Lucrarea evidențiază importanța colaborării dintre specialiști, autorități și societatea civilă, subliniind faptul că inițiativele comunitare existente în România, deși valoroase, au un impact limitat fără sprijin instituțional și fără o viziune arhitecturală coerentă. În acest sens, se propune realizarea unor ghiduri de intervenție în spațiul public, care să fie diseminate către administrațiile locale și să servească drept punct de plecare pentru proiecte de revitalizare urbană cu impact real.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+
+    <!-- PROJECT 5 -->
+    <article class="project" id="proiect-turn" data-category="studii">
+      <div class="project-number">05</div>
+      <div class="project-cover" onclick="toggleProject('proiect-turn')">
+        <div class="project-cover-top">
+          <div class="project-image">
+            <img src="05.jpg" alt="Turn de birouri cu funcțiuni conexe" style="object-position: center 65%;" />
+          </div>
+          <div class="project-info">
+            <div class="project-title">Turn de birouri cu funcțiuni conexe</div>
+            <div class="project-meta">
+              <div class="meta-row"><strong>Program</strong><span>Turn de birouri cu funcțiuni conexe</span></div>
+              <div class="meta-row"><strong>Status</strong><span>Concept</span></div>
+              <div class="meta-row"><strong>Year</strong><span>2018</span></div>
+            </div>
+            <div class="project-cover-description">
+              <p class="project-teaser">Într-un peisaj urban în continuă densificare, noul turn cu funcțiuni mixte propus oferă nu doar un reper arhitectural, ci și un catalizator social pentru cartierul în care se inserează. Proiectul se remarcă printr-o strategie volumetrică clară și o gândire sustenabilă, care depășește simpla eficiență funcțională.</p>
+              <button class="read-more-btn" onclick="toggleReadMore(this, event)">↓ citește mai mult</button>
+            </div>
+            <div class="accordion-hint" id="hint-proiect-turn">↓ detalii proiect</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-left">
+          <div class="project-image" onclick="toggleProject('proiect-turn')" style="cursor:pointer;">
+            <img src="05.jpg" alt="Turn de birouri cu funcțiuni conexe" style="object-position: center 65%;" />
+          </div>
+          <div class="project-meta" style="margin-top: 0.8rem;">
+            <div class="meta-row"><strong>Turn de birouri cu funcțiuni conexe</strong></div>
+            <div class="meta-row"><strong>Program</strong><span>Turn de birouri cu funcțiuni conexe</span></div>
+            <div class="meta-row"><strong>Status</strong><span>Concept</span></div>
+            <div class="meta-row"><strong>Year</strong><span>2018</span></div>
+          </div>
+          <div class="accordion-hint" onclick="toggleProject('proiect-turn')" style="cursor:pointer; margin-top: 1rem;">↑ închide</div>
+        </div>
+        <div class="project-center">
+          <div class="project-details">
+            <div class="project-gallery" id="slider-turn">
+              <div class="slider-track">
+                <img src="05.jpg" alt="Turn de birouri 1" />
+                <img src="macheta.jpg" alt="Machetă" />
+                <img src="sectiune.jpg" alt="Secțiune" />
+                <img src="plan.jpg" alt="Plan" />
+              </div>
+              <div class="slider-controls">
+                <div class="slider-arrows">
+                  <button class="slider-btn" onclick="slideGallery('slider-turn', -1)">← prev</button>
+                  <button class="slider-btn" onclick="slideGallery('slider-turn', 1)">next →</button>
+                </div>
+                <span class="slider-counter" id="counter-slider-turn">1 / 4</span>
+              </div>
+            </div>
+            <div class="project-text" style="margin-top: 2rem;">
+              <p class="project-teaser">Într-un peisaj urban în continuă densificare, noul turn cu funcțiuni mixte propus oferă nu doar un reper arhitectural, ci și un catalizator social pentru cartierul în care se inserează. Proiectul se remarcă printr-o strategie volumetrică clară și o gândire sustenabilă, care depășește simpla eficiență funcțională.</p>
+              <p class="project-teaser" style="margin-top: 0.8rem;">Clădirea este compusă din două volume principale: o bază orizontală alungită și un turn vertical care pare să plutească deasupra acesteia. Separarea volumetrică nu este doar un gest compozițional, ci o strategie de deschidere către oraș. Suspendarea unuia dintre volume creează, la nivelul solului, un spațiu public generos, protejat, dar permeabil, ce funcționează ca o piațetă urbană. Acest gest arhitectural oferă comunității un loc de întâlnire și relaxare, transformând parterul într-o interfață activă între spațiul construit și cel social.</p>
+              <p class="project-teaser" style="margin-top: 0.8rem;">Funcțiunile clădirii sunt gândite într-o logică de mixitate verticală. Zona de la bază găzduiește spații comerciale, servicii și zone semi-publice, în timp ce turnul include birouri și funcțiuni administrative. Această stratificare permite o utilizare eficientă a spațiului și o activitate constantă în jurul clădirii pe tot parcursul zilei.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <footer class="site-footer">
+      © 2024 Alexandru Brătescu — București, România
+    </footer>
+
+  </div>
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div>
+      <div class="sidebar-name">Alexandru Brătescu</div>
+      <div style="margin-top: 2rem;">
+      <p class="sidebar-bio">
+        Am absolvit Universitatea de Arhitectură și Urbanism „Ion Mincu" din București în 2020, unde activez în prezent ca asistent universitar. În 2025 mi-am finalizat doctoratul cu o cercetare dedicată spațiului public.
+      </p>
+      <p class="sidebar-bio" style="margin-top: 1rem;">
+        Practica mea profesională pornește de la convingerea că arhitectura bună se construiește prin înțelegerea profundă a contextului — a identității locului, a dinamicilor sociale și a rolului pe care spațiul construit îl joacă în viața comunității. Fiecare proiect este un exercițiu de ascultare: a locului, a oamenilor, a straturilor culturale care dau sens formei.
+      </p>
+      <p class="sidebar-bio" style="margin-top: 1rem;">
+        Mă interesează în mod special spațiul public ca teren de negociere între individ și colectivitate — un spațiu al memoriei, dar și al transformării. Simplitatea formală pe care o urmăresc nu este o estetică, ci o consecință a acestui proces: forma care rămâne după ce tot ce este superflu a fost îndepărtat.
+      </p>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <p class="sidebar-section-title">Proiecte</p>
+    <ul class="sidebar-nav">
+      <li><a href="#" onclick="filterProjects('all'); return false;" class="nav-filter active" data-filter="all">Arhitectură</a></li>
+      <li><a href="#" onclick="filterProjects('all'); return false;" class="nav-filter" data-filter="all">Urbanism</a></li>
+      <li><a href="#" onclick="filterProjects('all'); return false;" class="nav-filter" data-filter="all">Interior</a></li>
+      <li><a href="#" onclick="filterProjects('cercetare'); return false;" class="nav-filter" data-filter="cercetare">Cercetare</a></li>
+      <li><a href="#" onclick="filterProjects('studii'); return false;" class="nav-filter" data-filter="studii">Studii</a></li>
+    </ul>
+
+    <div class="sidebar-divider"></div>
+
+    <p class="sidebar-section-title">Contact</p>
+    <div class="sidebar-contact">
+      <div><strong>mail</strong><a href="mailto:alexandru@bratescu.ro">alexandru@bratescu.ro</a></div>
+      <div><strong>ig</strong><a href="#">@a.bratescu</a></div>
+      <div><strong>ln</strong><a href="#">LinkedIn</a></div>
+    </div>
+  </aside>
+
+</div>
+</div>
+
+<script>
+  function filterProjects(category) {
+    var projects = document.querySelectorAll('.project');
+    projects.forEach(function(p) {
+      if (category === 'all' || p.getAttribute('data-category') === category) {
+        p.style.display = '';
+      } else {
+        p.style.display = 'none';
+      }
+    });
+    // Update active state on nav
+    document.querySelectorAll('.nav-filter').forEach(function(a) {
+      if (a.getAttribute('data-filter') === category) {
+        a.style.fontWeight = '700';
+        a.style.color = 'var(--black)';
+      } else {
+        a.style.fontWeight = '';
+        a.style.color = '';
+      }
+    });
+    // Show/hide back button
+    var backBtn = document.getElementById('filter-back');
+    if (backBtn) {
+      backBtn.style.display = category === 'all' ? 'none' : 'block';
+    }
+  }
+
+  function showProjects() {
+    document.getElementById('splash').style.display = 'none';
+    var p = document.getElementById('projects');
+    p.style.display = 'block';
+    history.pushState({page: 'projects'}, '', '');
+  }
+
+  function showSplash() {
+    document.getElementById('projects').style.display = 'none';
+    document.getElementById('splash').style.display = 'flex';
+    history.pushState({page: 'splash'}, '', '');
+  }
+
+  window.addEventListener('popstate', function(e) {
+    var projects = document.getElementById('projects');
+    var splash = document.getElementById('splash');
+    if (projects.style.display === 'block') {
+      projects.style.display = 'none';
+      splash.style.display = 'flex';
+    } else {
+      splash.style.display = 'flex';
+    }
+  });
+
+  function alignSubtitle() {
+    var title = document.getElementById('site-title');
+    var subtitle = document.getElementById('site-subtitle');
+    if (title && subtitle) subtitle.style.width = title.offsetWidth + 'px';
+  }
+  window.addEventListener('load', alignSubtitle);
+  window.addEventListener('resize', alignSubtitle);
+
+  var sliderState = {};
+
+  function toggleProject(id) {
+    var article = document.getElementById(id);
+    var isOpen = article.classList.contains('open');
+    var allProjects = document.querySelectorAll('.project');
+    var container = document.querySelector('.scroll-area');
+    allProjects.forEach(function(p) {
+      p.classList.remove('open');
+      var h = document.getElementById('hint-' + p.id);
+      if (h) h.textContent = '\u2193 detalii proiect';
+    });
+    if (!isOpen) {
+      article.classList.add('open');
+      container.classList.add('projects-dimmed');
+    } else {
+      container.classList.remove('projects-dimmed');
+    }
+  }
+
+  function slideGallery(sliderId, dir) {
+    var gallery = document.getElementById(sliderId);
+    var track = gallery.querySelector('.slider-track');
+    var images = track.querySelectorAll('img');
+    var total = images.length;
+    if (!sliderState[sliderId]) sliderState[sliderId] = 0;
+    sliderState[sliderId] = (sliderState[sliderId] + dir + total) % total;
+    track.style.transform = 'translateX(-' + (sliderState[sliderId] * 100) + '%)';
+    document.getElementById('counter-' + sliderId).textContent =
+      (sliderState[sliderId] + 1) + ' / ' + total;
+  }
+
+  function toggleReadMore(btn, e) {
+    e.stopPropagation();
+    var desc = btn.closest('.project-cover-description');
+    var isExpanded = desc.classList.contains('expanded');
+    if (isExpanded) {
+      desc.classList.remove('expanded');
+      btn.textContent = '\u2193 cite\u0219te mai mult';
+    } else {
+      desc.classList.add('expanded');
+      btn.textContent = '\u2191 mai pu\u021bin';
+    }
+  }
+</script>
+
+</body>
+</html>
